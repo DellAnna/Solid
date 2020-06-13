@@ -1,0 +1,64 @@
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+#read dataframe with hourly granularity
+db_1=pd.read_csv('/Users/antonio/Desktop/tesi/crypto/DASH/DASH_hour_1.csv')
+if 'date' in db_1.columns :
+  del db_1['date']
+
+#shift price series of 1 entry
+db_1['close_h_1']=db_1['close'].shift(-1)
+
+print(db_1.close_h_1)
+Social_missing = db_1.isna()
+Social_num_missing = Social_missing.sum()
+Percentage_missing_social= Social_num_missing / len(db_1)
+
+median_1=db_1.median()
+Q1_1 = db_1.quantile(0.25)
+Q3_1 = db_1.quantile(0.75)
+IQR_1 = Q3_1 - Q1_1
+print(IQR_1)
+outliers=(db_1 < (Q1_1 - 1.5 * IQR_1)) |(db_1> (Q3_1 + 1.5 * IQR_1))
+Percentage_otliers_social=outliers.sum()/len(db_1)
+
+#read dataframe with daily granularity
+db_2=pd.read_csv('/Users/antonio/Desktop/tesi/crypto/DASH/dash_day.csv')
+if 'date' in db_2.columns :
+  del db_2['date']
+
+db_2.drop(db_2.columns[[-2]], axis=1, inplace=True)
+db_2.drop(db_2.tail(1).index,inplace=True)
+db_2['close'] = db_2['close'].str.replace(',', '').astype(float)
+db_2['open'] = db_2['open'].str.replace(',', '').astype(float)
+db_2['high'] = db_2['high'].str.replace(',', '').astype(float)
+db_2['low'] = db_2['low'].str.replace(',', '').astype(float)
+
+db_2['close_d_1']=db_2['close'].shift(-1)
+
+print (db_2.close_d_1)
+
+Block_missing = db_2.isna()
+print(Block_missing)
+Block_num_missing = Block_missing.sum()
+Percentage_missing_block= Block_num_missing / len(db_2)
+
+median_2=db_2.median()
+Q1_2 = db_2.quantile(0.25)
+Q3_2 = db_2.quantile(0.75)
+IQR_2 = Q3_2 - Q1_2
+print(IQR_2)
+outliers_2=(db_2 < (Q1_2 - 1.5 * IQR_2)) |(db_2> (Q3_2 + 1.5 * IQR_2))
+Percentage_otliers_block=outliers_2.sum()/len(db_2)
+
+print(Percentage_missing_social)
+print(Percentage_missing_block)
+
+
+
+
+
