@@ -1,5 +1,5 @@
 # Solid
-Applications of Data Science Tools to Financial fields
+OPEN-HIGH-LOW-CLOSE, Blockchain and Social Cryptocurrency Data Analysis
 
 Stored data is cleaned from outliers and null values, replaced with the median. 
 Concluded this phase, HeatMap correlation Matrix is generated for Social and Blockchain dataframes, 
