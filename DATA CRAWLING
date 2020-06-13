@@ -1,0 +1,307 @@
+import requests
+import pandas as pd
+
+apiKey = "private API Key"
+
+#import OHLCV data
+url = "https://min-api.cryptocompare.com/data/histohour"
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "limit": 2000
+}
+result_1 = requests.get(url, params=payload).json()
+df1 = pd.DataFrame(result_1['Data'])
+print(df1.head())
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1563440400, 
+    "limit": 2000
+}
+
+result_2 = requests.get(url, params=payload).json()
+df2= pd.DataFrame(result_2['Data'])
+
+print(df2.head())
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1556240400,
+    "limit": 2000
+}
+
+result_3 = requests.get(url, params=payload).json()
+
+df3 = pd.DataFrame(result_3['Data'])
+
+print(df3.head())
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1549036800,
+    "limit": 2000
+}
+
+result_4 = requests.get(url, params=payload).json()
+
+df4 = pd.DataFrame(result_4['Data'])
+  
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1541836800,
+    "limit": 2000
+}
+result_5 = requests.get(url, params=payload).json()
+
+df5 = pd.DataFrame(result_5['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1534636800,
+    "limit": 2000
+}
+
+result_6 = requests.get(url, params=payload).json()
+
+df6 = pd.DataFrame(result_6['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1527436800, 
+    "limit": 2000
+}
+
+result_7 = requests.get(url, params=payload).json()
+
+df7 = pd.DataFrame(result_7['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1520236800, 
+    "limit": 2000
+}
+
+result_8 = requests.get(url, params=payload).json()
+
+df8 = pd.DataFrame(result_8['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1513036800, 
+    "limit": 2000
+}
+
+result_9 = requests.get(url, params=payload).json()
+
+df9 = pd.DataFrame(result_9['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1505836800, 
+    "limit": 2000
+}
+
+result_10 = requests.get(url, params=payload).json()
+
+df10 = pd.DataFrame(result_10['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1498636800, 
+    "limit": 2000
+}
+
+result_11 = requests.get(url, params=payload).json()
+
+df11 = pd.DataFrame(result_11['Data'])
+ 
+payload = {
+    "api_key": apiKey,
+    "fsym": "DASH",
+    "tsym": "USD",
+    "toTs" : 1491436800, 
+    "limit": 2000
+}
+
+result_12 = requests.get(url, params=payload).json()
+
+df12 = pd.DataFrame(result_12['Data'])
+
+#OHLCV database given by merging all financial dataframes
+
+final=pd.concat([df12,df11,df10,df9,df8,df7,df6,df5,df4,df3,df2,df1])
+
+xport_csv = final.to_csv (r'DASH_OHLCV.csv', index = None, header=True)
+print(final.info)
+
+#import social data 
+url = "https://min-api.cryptocompare.com/data/social/coin/histo/hour"
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "limit": 2000
+}
+
+social_1 = requests.get(url, params=payload).json()
+
+db1 = pd.DataFrame(social_1['Data'])
+ 
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1563440400,
+    "limit": 2000
+}
+
+social_2 = requests.get(url, params=payload).json()
+
+db2 = pd.DataFrame(social_2['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1556240400,
+    "limit": 2000
+}
+
+social_3 = requests.get(url, params=payload).json()
+
+db3 = pd.DataFrame(social_3['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1549036800,
+    "limit": 2000
+}
+
+social_4 = requests.get(url, params=payload).json()
+
+db4 = pd.DataFrame(social_4['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1541836800,
+    "limit": 2000
+}
+
+social_5 = requests.get(url, params=payload).json()
+
+db5 = pd.DataFrame(social_5['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1534636800,
+    "limit": 2000
+}
+
+social_6 = requests.get(url, params=payload).json()
+
+db6 = pd.DataFrame(social_6['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1527436800, 
+    "limit": 2000
+}
+
+social_7 = requests.get(url, params=payload).json()
+
+db7 = pd.DataFrame(social_7['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1520236800, 
+    "limit": 2000
+}
+
+social_8 = requests.get(url, params=payload).json()
+
+db8 = pd.DataFrame(social_8['Data'])
+ 
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1513036800, 
+    "limit": 2000
+}
+
+social_9 = requests.get(url, params=payload).json()
+
+db9 = pd.DataFrame(social_9['Data'])
+ 
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1505836800, 
+    "limit": 2000
+}
+
+social_10 = requests.get(url, params=payload).json()
+
+db10 = pd.DataFrame(social_10['Data'])
+
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1498636800, 
+    "limit": 2000
+}
+
+social_11 = requests.get(url, params=payload).json()
+
+db11 = pd.DataFrame(social_11['Data'])
+ 
+payload = {
+    "api_key": apiKey,
+    "coinId": 3807,
+    "toTs" : 1491436800, 
+    "limit": 2000
+}
+
+social_12 = requests.get(url, params=payload).json()
+
+db12 = pd.DataFrame(social_12['Data'])
+
+#Scial database given by merging all social dataframes
+
+social_dataframe=pd.concat([db12,db11,db10,db9,db8,db7,db6,db5,db4,db3,db2,db1],sort=True)
+
+xport_csv = social_dataframe.to_csv (r'DASH_SOCIAL.csv', index = None, header=True)
+
+print(social_dataframe.info)
+
+financial_and_social = pd.concat([final,social_dataframe], axis=1, sort=False)
+
+xport_csv = financial_and_social.to_csv (r'Financial&Social.csv', index = None, header=True)
+
+
+
+
